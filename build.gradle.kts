@@ -25,7 +25,7 @@ tasks.named<Jar>("jar") {
 
 tasks.register<Copy>("copy-macro-jar") {
   dependsOn(":macros:jar")
-  from("macros/build/libs/sprout-validation-macros.jar")
+  from("macros/build/libs/linear-validation-macros.jar")
   into("build/libs")
 }
 

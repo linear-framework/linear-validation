@@ -39,7 +39,7 @@ class ValidationSpec extends BaseSpec {
   }
 
   it should "not fire for a valid request" in {
-    val request = CreateUserRequest(email = "keith@sproutscala.com", password = "password", passwordConfirmation = "password")
+    val request = CreateUserRequest(email = "keith@linearframework.com", password = "password", passwordConfirmation = "password")
 
     val validatedResult = request.validated
     val validateResult = request.validate.getOrElse(null)
