@@ -1,6 +1,6 @@
 package com.linearframework.validation
 
-import com.linearframework.validation.macros.NameOf
+import com.linearframework.macros.NameOf
 
 /**
  * When mixed in with a class, provides a mechanism for DSL-based validation.

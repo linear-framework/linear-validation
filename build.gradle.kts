@@ -1,17 +1,28 @@
 plugins {
   `java-library`
   scala
+  `maven-publish`
 }
+
+group = "com.linearframework"
+version = "0.1.1-SNAPSHOT"
 
 repositories {
   jcenter()
   mavenCentral()
+  maven {
+    url = uri("https://maven.pkg.github.com/linear-framework/linear-macros")
+    credentials {
+      username = System.getenv("GITHUB_USER")
+      password = System.getenv("GITHUB_TOKEN")
+    }
+  }
 }
 
 dependencies {
   implementation("org.scala-lang:scala-library:2.13.1")
   implementation("org.scala-lang:scala-reflect:2.13.1")
-  implementation(project(":macros"))
+  api("com.linearframework:macros:0.1.1-SNAPSHOT")
 
   testImplementation("junit:junit:4.13")
   testImplementation("org.scalatest:scalatest_2.13:3.1.1")
@@ -23,12 +34,21 @@ tasks.named<Jar>("jar") {
   from(sourceSets["main"].allSource)
 }
 
-tasks.register<Copy>("copy-macro-jar") {
-  dependsOn(":macros:jar")
-  from("macros/build/libs/linear-validation-macros.jar")
-  into("build/libs")
-}
-
-tasks.named("build") {
-  dependsOn("copy-macro-jar")
+publishing {
+  repositories {
+    maven {
+      name = "LinearValidation"
+      url = uri("https://maven.pkg.github.com/linear-framework/linear-validation")
+      credentials {
+        username = System.getenv("GITHUB_USER")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+  publications {
+    create<MavenPublication>("PublishToGithub") {
+      artifactId = "validation"
+      from(components["java"])
+    }
+  }
 }
