@@ -5,7 +5,6 @@ plugins {
 }
 
 group = "com.linearframework"
-version = "0.1.1-SNAPSHOT"
 
 java {
   sourceCompatibility = JavaVersion.VERSION_1_8
@@ -27,7 +26,7 @@ repositories {
 dependencies {
   implementation("org.scala-lang:scala-library:2.13.1")
   implementation("org.scala-lang:scala-reflect:2.13.1")
-  api("com.linearframework:macros:0.1.1-SNAPSHOT")
+  api("com.linearframework:macros:" + version)
 
   testImplementation("junit:junit:4.13")
   testImplementation("org.scalatest:scalatest_2.13:3.1.1")
